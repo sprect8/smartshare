@@ -1,14 +1,78 @@
-# smartshare
-A 0.4.x smart share solidity contract to split ether across multiple users.
+### Datalytics configurable properties
+All configurations must be valid JSON files (use jsonlint if you're not sure)
+No spaces or tables (must be flat)
+e.g.:
+{
+"table":{
+"columns":{
+"ranges": [
+"interpolateOrRd",
+"interpolateOrRd"
+]
+}
+}
+}
 
-The purpose of Smart Share is to automate the distribution of funds from a shared mining account into the accounts of multiple people
+NOT
 
-A team of guys have purchased a mining rig to mine ethereum. The total mined assets are pushed into a shared account.
-The mined assets are then split each month on maturity of the mining contract for the month. Each person gets a share of the mined assets depending on their share of the mining rig
+```
+{
+    "table":{
+        "columns":{
+            "ranges":["interpolateOrRd", "interpolateOrRd", null, "interpolateOrRd"], 
+            "scores":{
+                "3":{},
+                "4":{
+                    "underColor":"green",
+                    "underFill":"green",
+                    "overColor":"red",
+                    "overFill":"red",
+                    "flatColor":"orange",
+                    "flatFill":"orange"
+                }
+            }
+        }
+    },
+    "pageSize":10
+}
+```
+Examples below are tabbed for easy reading!
+# Tables
+```
+{
+    "table":{
+        "columns":{
+            "ranges":["interpolateOrRd", "interpolateOrRd", null, "interpolateOrRd"], 
+            "scores":{
+                "3":{},
+                "4":{
+                    "underColor":"green",
+                    "underFill":"green",
+                    "overColor":"red",
+                    "overFill":"red",
+                    "flatColor":"orange",
+                    "flatFill":"orange"
+                }
+            }
+        }
+    },
+    "pageSize":10
+}
+```
+Notes: 
+- ranges map starting at index 1 (because we map using the series values)
+- Put null in the ranges to skip specific columns
+- scores map start at index 0
+- scores is an object and the key (number) represents the index of the column
+- refer to https://github.com/d3/d3-scale-chromatic for valid ranges configuration
 
-SmartShare implements the following security measures:
-1. only the owner of the contract can add new members to the mining pool
-2. it is the responsibility of the members to withdraw their funds
-3. member percentage is set by owner of the contract on calling, and their share is calculated accordingly
-
-Note that as per solidity documentation the best practice recommendation is for the members to withdraw the ether, not the contract owner. This prevents a certain attack vector that can cause funds to be leaked from the contract.
+# Maps
+```
+{
+    "mapCentre":{
+        "lat":3.10,
+        "long":,107.42
+    },
+    "mapZoom":6
+}
+```
